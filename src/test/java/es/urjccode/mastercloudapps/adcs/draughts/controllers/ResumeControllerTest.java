@@ -4,14 +4,16 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import es.urjccode.mastercloudapps.adcs.draughts.models.Game;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Session;
+import es.urjccode.mastercloudapps.adcs.draughts.models.State;
 import es.urjccode.mastercloudapps.adcs.draughts.models.StateValue;
 
 public class ResumeControllerTest {
 
     @Test
     public void givenResumeControllerWhenResumeGameMoveToInitialStateRequiereCorrectThenNotError() {
-        Session session= new Session();
+        Session session= new Session(new State(), new Game());
         ResumeController resumeController = new ResumeController(session);
         assertEquals(StateValue.INITIAL, session.getValueState());
         resumeController.next();
@@ -24,7 +26,7 @@ public class ResumeControllerTest {
 
     @Test(expected = AssertionError.class)
     public void givenResumeControllerWhenResumeGameMoveOutThenError() {
-        Session session= new Session();
+        Session session= new Session(new State(), new Game());
         ResumeController resumeController = new ResumeController(session);
         assertEquals(StateValue.INITIAL, session.getValueState());
         resumeController.next();

@@ -3,7 +3,9 @@ package es.urjccode.mastercloudapps.adcs.draughts.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import es.urjccode.mastercloudapps.adcs.draughts.models.Game;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Session;
+import es.urjccode.mastercloudapps.adcs.draughts.models.State;
 import es.urjccode.mastercloudapps.adcs.draughts.models.StateValue;
 
 public class Logic {
@@ -15,7 +17,7 @@ public class Logic {
 	private Map<StateValue, Controller> controllers;
 
 	public Logic() {
-        this.session = new Session();
+        this.session = new Session(new State(), new Game());
         this.controllers = new HashMap<StateValue, Controller>();
 		this.startController = new StartController(this.session);
 		this.playController = new PlayController(this.session);
