@@ -17,8 +17,6 @@ public class CommandView extends SubView {
     private static final int ORIGIN_GROUP = 1;
     private static final int TARGET_GROUP = 2;
 
-    private static final String MESSAGE = "Derrota!!! No puedes mover tus fichas!!!";
-
     public CommandView(){
         super();
     }
@@ -28,7 +26,7 @@ public class CommandView extends SubView {
         Error error = null;
         GameView gameView = new GameView();
         do {
-            String command = this.console.readString("Mueven las " + color + ": ");
+            String command = this.console.readString(String.format(Message.NEXT_MOVE.getMessage(), color));
             Matcher matcher = CommandView.pattern.matcher(command);
             
             if(matcher.find()){
@@ -37,12 +35,12 @@ public class CommandView extends SubView {
                 error = Error.NOT_UNDERSTAND;
             }
             if (error != null){
-                console.writeln("Error!!!" + error.name());
+                console.writeln(String.format(Message.ERROR.getMessage(), error.name()));
             }
             gameView.write(playController);
         } while (error != null); 
         if (playController.isBlocked()){
-            this.console.write(CommandView.MESSAGE);
+            this.console.write(Message.GAME_OVER.getMessage());
         }
     }
 
