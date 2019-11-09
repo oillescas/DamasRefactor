@@ -15,7 +15,7 @@ public class PlayController extends Controller {
 	public Error move(Coordinate origin, Coordinate target){
 		Error error = this.session.move(origin, target);
 		if (this.session.isBlocked()){
-			this.session.next();
+			this.session.state.next();
 		}
 		return error;
     }
