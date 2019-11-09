@@ -20,7 +20,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import es.urjccode.mastercloudapps.adcs.draughts.controllers.StartController;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Game;
-import es.urjccode.mastercloudapps.adcs.draughts.models.Session;
 import es.urjccode.mastercloudapps.adcs.draughts.models.State;
 import es.urjccode.mastercloudapps.adcs.draughts.utils.Console;
 
@@ -43,7 +42,7 @@ public class GameViewTest {
     
     @Test
     public void testInteract(){
-        StartController startController = new StartController(new Session(new State(), new Game()));
+        StartController startController = new StartController(new State(), new Game());
         this.gameView.write(startController);
         verify(console, times(90)).write(argument.capture());
         List<String> rows = Arrays.asList(
