@@ -32,9 +32,7 @@ public class CommandView extends SubView {
             Matcher matcher = CommandView.pattern.matcher(command);
             
             if(matcher.find()){
-                int origin = Integer.parseInt(matcher.group(ORIGIN_GROUP));
-                int target = Integer.parseInt(matcher.group(TARGET_GROUP));
-                error = playController.move(new Coordinate(origin/10-1, origin%10-1), new Coordinate(target/10-1, target%10-1));   
+                error = playController.move(Coordinate.fromString(matcher.group(ORIGIN_GROUP)),Coordinate.fromString(matcher.group(TARGET_GROUP)));   
             } else {
                 error = Error.NOT_UNDERSTAND;
             }
