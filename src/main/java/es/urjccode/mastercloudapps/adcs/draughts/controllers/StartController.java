@@ -4,8 +4,11 @@ import es.urjccode.mastercloudapps.adcs.draughts.models.Session;
 
 public class StartController extends Controller {
 
+	private Session session;
+
 	public StartController(Session session) {
-        super(session);
+		super(session.state, session.game);
+		this.session = session;
 	}
 
     @Override

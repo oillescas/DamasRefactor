@@ -4,8 +4,11 @@ import es.urjccode.mastercloudapps.adcs.draughts.models.Session;
 
 public class ResumeController extends Controller {
 
+	private Session session;
+
 	public ResumeController(Session session) {
-        super(session);
+		super(session.state, session.game);
+		this.session = session;
     }
     
     @Override

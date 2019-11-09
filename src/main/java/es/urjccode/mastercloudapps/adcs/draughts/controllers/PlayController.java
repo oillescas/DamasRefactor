@@ -8,8 +8,11 @@ import es.urjccode.mastercloudapps.adcs.draughts.models.Error;
 
 public class PlayController extends Controller {
 
-    public PlayController(Session session) {
-		super(session);
+    private Session session;
+
+	public PlayController(Session session) {
+		super(session.state, session.game);
+		this.session = session;
 	}
 
 	public Error move(Coordinate origin, Coordinate target){
