@@ -10,9 +10,6 @@ public class Session {
 		this.state = state;
 		this.game = game;
 	}
-	public StateValue getValueState() {
-		return this.state.getValueState();
-	}
 
 	public void next() {
 		this.state.next();

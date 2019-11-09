@@ -15,9 +15,13 @@ public class Logic {
     private PlayController playController;
     private ResumeController resumeController;
 	private Map<StateValue, Controller> controllers;
+	private State state;
+	private Game game;
 
 	public Logic() {
-        this.session = new Session(new State(), new Game());
+		this.state = new State();
+		this.game = new Game();
+        this.session = new Session(this.state, this.game);
         this.controllers = new HashMap<StateValue, Controller>();
 		this.startController = new StartController(this.session);
 		this.playController = new PlayController(this.session);
@@ -29,7 +33,7 @@ public class Logic {
 	}
 
 	public Controller getController() {
-		return this.controllers.get(this.session.getValueState());
+		return this.controllers.get(this.session.state.getValueState());
     }
 
 }
