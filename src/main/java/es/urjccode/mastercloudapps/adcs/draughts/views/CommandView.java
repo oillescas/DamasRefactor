@@ -26,14 +26,7 @@ public class CommandView extends SubView {
         Error error = null;
         GameView gameView = new GameView();
         do {
-            String command = this.console.readString(String.format(Message.NEXT_MOVE.getMessage(), color));
-            Matcher matcher = CommandView.pattern.matcher(command);
-            
-            if(matcher.find()){
-                error = playController.move(Coordinate.fromString(matcher.group(ORIGIN_GROUP)),Coordinate.fromString(matcher.group(TARGET_GROUP)));   
-            } else {
-                error = Error.NOT_UNDERSTAND;
-            }
+            error = readMove(playController, color);
             if (error != null){
                 console.writeln(String.format(Message.ERROR.getMessage(), error.name()));
             }
@@ -42,6 +35,19 @@ public class CommandView extends SubView {
         if (playController.isBlocked()){
             this.console.write(Message.GAME_OVER.getMessage());
         }
+    }
+
+    private Error readMove(PlayController playController, String color) {
+        Error error;
+        String command = this.console.readString(String.format(Message.NEXT_MOVE.getMessage(), color));
+        Matcher matcher = CommandView.pattern.matcher(command);
+        
+        if(matcher.find()){
+            error = playController.move(Coordinate.fromString(matcher.group(ORIGIN_GROUP)),Coordinate.fromString(matcher.group(TARGET_GROUP)));   
+        } else {
+            error = Error.NOT_UNDERSTAND;
+        }
+        return error;
     }
 
 }
