@@ -12,7 +12,10 @@ public class CommandView extends SubView {
     private static final String REGEX = "(\\d\\d)[\\.\\,](\\d\\d)";
     private static final Pattern pattern = Pattern.compile(REGEX);
 
-    private static final String[] COLORS = {"blancas", "negras"};
+    private static final String[] COLORS = {
+        Message.WHITE_TURN.getMessage(), 
+        Message.BLACK_TURN.getMessage()
+    };
 
     private static final int ORIGIN_GROUP = 1;
     private static final int TARGET_GROUP = 2;
