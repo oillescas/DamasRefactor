@@ -9,7 +9,6 @@ import org.junit.Test;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Coordinate;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Game;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Piece;
-import es.urjccode.mastercloudapps.adcs.draughts.models.Session;
 import es.urjccode.mastercloudapps.adcs.draughts.models.State;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Color;
 
@@ -17,7 +16,7 @@ public class PlayControllerTest {
 
     @Test
     public void givenPlayControllerWhenMovementRequiereCorrectThenNotError() {
-        PlayController playController = new PlayController(new Session(new State(), new Game()));
+        PlayController playController = new PlayController(new State(), new Game());
         Coordinate origin = new Coordinate(5, 0);
         Coordinate target = new Coordinate(4, 1);
         assertNull(playController.move(origin, target));
