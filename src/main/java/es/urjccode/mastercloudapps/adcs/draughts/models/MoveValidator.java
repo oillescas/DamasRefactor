@@ -1,20 +1,20 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
-public abstract class MoveValidator {
+abstract class MoveValidator {
 
     private MoveValidator next;
 
-    public abstract Error moveValid(Coordinate origin, Coordinate target);
+    abstract Error moveValid(Coordinate origin, Coordinate target);
 
-    public void setNext(MoveValidator next){
+    void setNext(MoveValidator next){
         this.next = next;
     }
 
-    public MoveValidator getNext(){
+    MoveValidator getNext(){
         return next;
     }
 
-    public Error validNext(Coordinate origin, Coordinate target){
+    Error validNext(Coordinate origin, Coordinate target){
         if(this.getNext()!=null){
             return this.getNext().moveValid(origin, target);
         }

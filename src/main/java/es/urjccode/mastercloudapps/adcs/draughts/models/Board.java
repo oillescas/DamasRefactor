@@ -97,7 +97,7 @@ class Board extends MoveValidator{
     }
 
     @Override
-    public Error moveValid(Coordinate origin, Coordinate target) {
+    Error moveValid(Coordinate origin, Coordinate target) {
         if (this.isEmpty(origin)) {
 			return Error.EMPTY_ORIGIN;
         }

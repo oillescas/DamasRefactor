@@ -36,7 +36,7 @@ public class Game extends MoveValidator{
 		return null;
     }
 
-    public Error moveValid(Coordinate origin, Coordinate target){
+    Error moveValid(Coordinate origin, Coordinate target){
         Color color = this.board.getColor(origin);
 		if (color!=null && this.turn.getColor() != color) {
 			return Error.OPPOSITE_PIECE;
