@@ -1,6 +1,6 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
-public class Game {
+public class Game extends MoveValidator{
 
 	private Board board;
 
@@ -34,43 +34,37 @@ public class Game {
 			}
 		}
 		return null;
-	}
+    }
 
-	public Error move(Coordinate origin, Coordinate target) {
-		assert origin != null && target != null;
-		if (!origin.isValid() || !target.isValid()) {
-			return Error.OUT_COORDINATE;
-		}
-		if (board.isEmpty(origin)) {
-			return Error.EMPTY_ORIGIN;
-		}
-		Color color = this.board.getColor(origin);
-		if (this.turn.getColor() != color) {
+    public Error moveValid(Coordinate origin, Coordinate target){
+        Color color = this.board.getColor(origin);
+		if (color!=null && this.turn.getColor() != color) {
 			return Error.OPPOSITE_PIECE;
-		}
-		if (!origin.isDiagonal(target)) {
-			return Error.NOT_DIAGONAL;
-		}
-		Piece piece = this.board.getPiece(origin);
-		if (!piece.isAdvanced(origin, target)) {
-			return Error.NOT_ADVANCED;
-		}
-		if (origin.diagonalDistance(target) >= 3) {
-			return Error.BAD_DISTANCE;
-		}
-		if (!this.board.isEmpty(target)) {
-			return Error.NOT_EMPTY_TARGET;
-		}
+        }
+        if(this.getNext()!=null){
+            return this.getNext().moveValid(origin, target);
+        }
+        return null;
+    }
+
+    public Error getErrorMove(Coordinate origin, Coordinate target){
+
+        this.setNext(origin);
+        origin.setNext(board);
+
+        return this.moveValid(origin, target);
+    }
+
+	public void move(Coordinate origin, Coordinate target) {
+		assert origin != null && target != null;
+        assert getErrorMove(origin, target) ==null;
+
 		if (origin.diagonalDistance(target) == 2) {
 			Coordinate between = origin.betweenDiagonal(target);
-			if (this.board.getPiece(between) == null) {
-				return Error.EATING_EMPTY;
-			}
 			this.board.remove(between);
 		}
 		this.board.move(origin, target);
 		this.turn.change();
-		return null;
 	}
 
 	public Color getColor(Coordinate coordinate) {

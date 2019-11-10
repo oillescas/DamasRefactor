@@ -3,7 +3,7 @@ package es.urjccode.mastercloudapps.adcs.draughts.models;
 import java.util.ArrayList;
 import java.util.List;
 
-class Board {
+class Board extends MoveValidator{
 
     private static final int DIMENSION = 8;
 
@@ -44,7 +44,7 @@ class Board {
     boolean isEmpty(Coordinate coordinate) {
         return this.getSquare(coordinate).isEmpty();
     }
-    
+
     Color getColor(Coordinate coordinate) {
         return this.getSquare(coordinate).getColor();
     }
@@ -58,7 +58,7 @@ class Board {
         }
 		return pieces;
 	}
-    
+
     int getDimension() {
 		return Board.DIMENSION;
 	}
@@ -94,6 +94,32 @@ class Board {
             }
         }
         return string + row + "\n";
+    }
+
+    @Override
+    public Error moveValid(Coordinate origin, Coordinate target) {
+        if (this.isEmpty(origin)) {
+			return Error.EMPTY_ORIGIN;
+        }
+        if (!this.isEmpty(target)) {
+			return Error.NOT_EMPTY_TARGET;
+		}
+        Piece piece = this.getPiece(origin);
+		if (!piece.isAdvanced(origin, target)) {
+			return Error.NOT_ADVANCED;
+        }
+
+        if (origin.diagonalDistance(target) == 2) {
+			Coordinate between = origin.betweenDiagonal(target);
+			if (this.getPiece(between) == null) {
+				return Error.EATING_EMPTY;
+			}
+        }
+
+        if(this.getNext()!=null){
+            return this.getNext().moveValid(origin, target);
+        }
+        return null;
     }
 
 }
