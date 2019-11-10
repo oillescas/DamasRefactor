@@ -116,10 +116,7 @@ class Board extends MoveValidator{
 			}
         }
 
-        if(this.getNext()!=null){
-            return this.getNext().moveValid(origin, target);
-        }
-        return null;
+        return this.validNext(origin, target);
     }
 
 }

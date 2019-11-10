@@ -13,4 +13,11 @@ public abstract class MoveValidator {
     public MoveValidator getNext(){
         return next;
     }
+
+    public Error validNext(Coordinate origin, Coordinate target){
+        if(this.getNext()!=null){
+            return this.getNext().moveValid(origin, target);
+        }
+        return null;
+    }
 }

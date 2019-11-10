@@ -104,12 +104,7 @@ public class Coordinate extends MoveValidator {
         if (origin.diagonalDistance(target) >= 3) {
 			return Error.BAD_DISTANCE;
 		}
-
-
-        if(this.getNext()!=null){
-            return this.getNext().moveValid(origin, target);
-        }
-        return null;
+        return this.validNext(origin, target);
     }
 
 }
