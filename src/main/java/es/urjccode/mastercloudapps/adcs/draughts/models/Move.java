@@ -71,17 +71,12 @@ public class Move extends MoveValidator{
     }
     
     @Override
-    Error moveValid(Move move) {
+    Error moveValid(Move move, PieceSearcher searcher) {
 
         if (!move.isValid()) {
 			return Error.OUT_COORDINATE;
         }
-        if (!move.isDiagonal()) {
-			return Error.NOT_DIAGONAL;
-        }
-        if (move.diagonalDistance() >= 3) {
-			return Error.BAD_DISTANCE;
-		}
-        return this.validNext(move);
+        
+        return this.validNext(move, searcher);
     }
 }

@@ -36,20 +36,22 @@ public class Game extends MoveValidator{
 		return null;
     }
 
-    Error moveValid(Move move){
+    Error moveValid(Move move, PieceSearcher searcher){
         Color color = this.board.getColor(move.getOrigin());
 		if (color!=null && this.turn.getColor() != color) {
 			return Error.OPPOSITE_PIECE;
         }
-        return this.validNext(move);
+        return this.validNext(move, this.board);
     }
 
     public Error getErrorMove(Move move){
-
+    	Piece pieza = this.board.getPiece(move.getOrigin());
+    	
         this.setNext(move);
         move.setNext(board);
+        board.setNext(pieza);
 
-        return this.moveValid(move);
+        return this.moveValid(move, board);
     }
 
 	public void move(Move move) {

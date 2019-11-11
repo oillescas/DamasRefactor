@@ -3,7 +3,7 @@ package es.urjccode.mastercloudapps.adcs.draughts.models;
 import java.util.ArrayList;
 import java.util.List;
 
-class Board extends MoveValidator{
+class Board extends MoveValidator implements PieceSearcher{
 
     private static final int DIMENSION = 8;
 
@@ -36,8 +36,9 @@ class Board extends MoveValidator{
     void move(Move move) {
         this.put(move.getTarget(), this.remove(move.getOrigin()));
     }
-
-    Piece getPiece(Coordinate coordinate) {
+    
+    @Override
+    public Piece getPiece(Coordinate coordinate) {
         return this.getSquare(coordinate).getPiece();
     }
 
@@ -97,26 +98,15 @@ class Board extends MoveValidator{
     }
 
     @Override
-    Error moveValid(Move move) {
+    Error moveValid(Move move,PieceSearcher searcher) {
         if (this.isEmpty(move.getOrigin())) {
 			return Error.EMPTY_ORIGIN;
         }
         if (!this.isEmpty(move.getTarget())) {
 			return Error.NOT_EMPTY_TARGET;
 		}
-        Piece piece = this.getPiece(move.getOrigin());
-		if (!piece.isAdvanced(move)) {
-			return Error.NOT_ADVANCED;
-        }
 
-        if (move.diagonalDistance() == 2) {
-			Coordinate between = move.betweenDiagonal();
-			if (this.getPiece(between) == null) {
-				return Error.EATING_EMPTY;
-			}
-        }
-
-        return this.validNext(move);
+        return this.validNext(move, searcher);
     }
 
 }

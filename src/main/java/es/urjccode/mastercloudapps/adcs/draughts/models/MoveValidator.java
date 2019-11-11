@@ -4,7 +4,7 @@ abstract class MoveValidator {
 
     private MoveValidator next;
 
-    abstract Error moveValid(Move move);
+    abstract Error moveValid(Move move, PieceSearcher searcher);
 
     void setNext(MoveValidator next){
         this.next = next;
@@ -14,9 +14,9 @@ abstract class MoveValidator {
         return next;
     }
 
-    Error validNext(Move move){
+    Error validNext(Move move, PieceSearcher searcher){
         if(this.getNext()!=null){
-            return this.getNext().moveValid(move);
+            return this.getNext().moveValid(move, searcher);
         }
         return null;
     }
