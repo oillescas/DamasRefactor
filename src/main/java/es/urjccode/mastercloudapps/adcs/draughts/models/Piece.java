@@ -2,6 +2,7 @@ package es.urjccode.mastercloudapps.adcs.draughts.models;
 
 public class Piece extends MoveValidator{
 
+	private static final int MAX_MOVE_LENGTH = 2;
 	private Color color;
 
 	Piece(Color color){
@@ -29,11 +30,11 @@ public class Piece extends MoveValidator{
 		if (!this.isAdvanced(move)) {
 			return Error.NOT_ADVANCED;
         }
-        if (move.diagonalDistance() >= 3) {
+        if (move.diagonalDistance() > MAX_MOVE_LENGTH) {
 			return Error.BAD_DISTANCE;
 		}
         
-        if (move.diagonalDistance() == 2) {
+        if (move.diagonalDistance() == MAX_MOVE_LENGTH) {
 			Coordinate between = move.betweenDiagonal();
 			if (searcher.getPiece(between) == null) {
 				return Error.EATING_EMPTY;
