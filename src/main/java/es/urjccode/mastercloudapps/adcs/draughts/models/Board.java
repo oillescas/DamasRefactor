@@ -33,8 +33,8 @@ class Board extends MoveValidator{
         return this.getSquare(coordinate).remove();
     }
 
-    void move(Coordinate origin, Coordinate target) {
-        this.put(target, this.remove(origin));
+    void move(Move move) {
+        this.put(move.target, this.remove(move.origin));
     }
 
     Piece getPiece(Coordinate coordinate) {
@@ -97,26 +97,26 @@ class Board extends MoveValidator{
     }
 
     @Override
-    Error moveValid(Coordinate origin, Coordinate target) {
-        if (this.isEmpty(origin)) {
+    Error moveValid(Move move) {
+        if (this.isEmpty(move.origin)) {
 			return Error.EMPTY_ORIGIN;
         }
-        if (!this.isEmpty(target)) {
+        if (!this.isEmpty(move.target)) {
 			return Error.NOT_EMPTY_TARGET;
 		}
-        Piece piece = this.getPiece(origin);
-		if (!piece.isAdvanced(origin, target)) {
+        Piece piece = this.getPiece(move.origin);
+		if (!piece.isAdvanced(move.origin, move.target)) {
 			return Error.NOT_ADVANCED;
         }
 
-        if (origin.diagonalDistance(target) == 2) {
-			Coordinate between = origin.betweenDiagonal(target);
+        if (move.diagonalDistance() == 2) {
+			Coordinate between = move.betweenDiagonal();
 			if (this.getPiece(between) == null) {
 				return Error.EATING_EMPTY;
 			}
         }
 
-        return this.validNext(origin, target);
+        return this.validNext(move);
     }
 
 }

@@ -36,12 +36,12 @@ public class Game extends MoveValidator{
 		return null;
     }
 
-    Error moveValid(Coordinate origin, Coordinate target){
-        Color color = this.board.getColor(origin);
+    Error moveValid(Move move){
+        Color color = this.board.getColor(move.origin);
 		if (color!=null && this.turn.getColor() != color) {
 			return Error.OPPOSITE_PIECE;
         }
-        return this.validNext(origin, target);
+        return this.validNext(move);
     }
 
     public Error getErrorMove(Move move){
@@ -49,7 +49,7 @@ public class Game extends MoveValidator{
         this.setNext(move.origin);
         move.origin.setNext(board);
 
-        return this.moveValid(move.origin, move.target);
+        return this.moveValid(move);
     }
 
 	public void move(Move move) {
@@ -59,7 +59,7 @@ public class Game extends MoveValidator{
 			Coordinate between = move.betweenDiagonal();
 			this.board.remove(between);
 		}
-		this.board.move(move.origin, move.target);
+		this.board.move(move);
 		this.turn.change();
 	}
 

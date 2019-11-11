@@ -4,7 +4,7 @@ abstract class MoveValidator {
 
     private MoveValidator next;
 
-    abstract Error moveValid(Coordinate origin, Coordinate target);
+    abstract Error moveValid(Move move);
 
     void setNext(MoveValidator next){
         this.next = next;
@@ -14,9 +14,9 @@ abstract class MoveValidator {
         return next;
     }
 
-    Error validNext(Coordinate origin, Coordinate target){
+    Error validNext(Move move){
         if(this.getNext()!=null){
-            return this.getNext().moveValid(origin, target);
+            return this.getNext().moveValid(move);
         }
         return null;
     }

@@ -93,18 +93,18 @@ public class Coordinate extends MoveValidator {
     }
 
     @Override
-    Error moveValid(Coordinate origin, Coordinate target) {
+    Error moveValid(Move move) {
 
-        if (!origin.isValid() || !target.isValid()) {
+        if (!move.origin.isValid() || !move.target.isValid()) {
 			return Error.OUT_COORDINATE;
         }
-        if (!origin.isDiagonal(target)) {
+        if (!move.origin.isDiagonal(move.target)) {
 			return Error.NOT_DIAGONAL;
         }
-        if (origin.diagonalDistance(target) >= 3) {
+        if (move.origin.diagonalDistance(move.target) >= 3) {
 			return Error.BAD_DISTANCE;
 		}
-        return this.validNext(origin, target);
+        return this.validNext(move);
     }
 
 }
