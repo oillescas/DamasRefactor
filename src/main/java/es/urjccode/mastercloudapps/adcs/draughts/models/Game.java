@@ -46,8 +46,8 @@ public class Game extends MoveValidator{
 
     public Error getErrorMove(Move move){
 
-        this.setNext(move.origin);
-        move.origin.setNext(board);
+        this.setNext(move);
+        move.setNext(board);
 
         return this.moveValid(move);
     }

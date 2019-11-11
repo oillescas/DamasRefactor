@@ -1,6 +1,6 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
-public class Coordinate extends MoveValidator {
+public class Coordinate{
 
     private int row;
     private int column;
@@ -65,19 +65,6 @@ public class Coordinate extends MoveValidator {
         return true;
     }
 
-    @Override
-    Error moveValid(Move move) {
 
-        if (!move.origin.isValid() || !move.target.isValid()) {
-			return Error.OUT_COORDINATE;
-        }
-        if (!move.isDiagonal()) {
-			return Error.NOT_DIAGONAL;
-        }
-        if (move.diagonalDistance() >= 3) {
-			return Error.BAD_DISTANCE;
-		}
-        return this.validNext(move);
-    }
 
 }
