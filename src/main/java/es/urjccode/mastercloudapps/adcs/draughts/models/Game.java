@@ -74,7 +74,7 @@ public class Game extends MoveValidator{
 		return this.board + "\n" + this.turn;
 	}
 
-	public Color getColor() {
+	public Color getTurnColor() {
 		return this.turn.getColor();
 	}
 
