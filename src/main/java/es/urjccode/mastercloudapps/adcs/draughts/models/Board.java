@@ -105,7 +105,7 @@ class Board extends MoveValidator{
 			return Error.NOT_EMPTY_TARGET;
 		}
         Piece piece = this.getPiece(move.origin);
-		if (!piece.isAdvanced(move.origin, move.target)) {
+		if (!piece.isAdvanced(move)) {
 			return Error.NOT_ADVANCED;
         }
 
