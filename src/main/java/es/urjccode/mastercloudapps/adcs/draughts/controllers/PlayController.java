@@ -6,6 +6,7 @@ import es.urjccode.mastercloudapps.adcs.draughts.models.Piece;
 import es.urjccode.mastercloudapps.adcs.draughts.models.State;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Error;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Game;
+import es.urjccode.mastercloudapps.adcs.draughts.models.Move;
 
 public class PlayController extends Controller {
 
@@ -13,10 +14,10 @@ public class PlayController extends Controller {
 		super(state, game);
 	}
 
-	public Error move(Coordinate origin, Coordinate target){
-        Error error = this.game.getErrorMove(origin, target);
+	public Error move(Move move){
+        Error error = this.game.getErrorMove(move.origin, move.target);
         if(error== null){
-            this.game.move(origin, target);
+            this.game.move(move.origin, move.target);
         }
 
 		if (this.game.isBlocked()){
@@ -41,5 +42,7 @@ public class PlayController extends Controller {
 	public void accept(ControllersVisitor controllersVisitor) {
 		controllersVisitor.visit(this);
 	}
+
+
 
 }

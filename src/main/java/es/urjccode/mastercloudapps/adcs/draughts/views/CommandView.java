@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import es.urjccode.mastercloudapps.adcs.draughts.controllers.PlayController;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Error;
+import es.urjccode.mastercloudapps.adcs.draughts.models.Move;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Coordinate;
 
 public class CommandView extends SubView {
@@ -46,7 +47,7 @@ public class CommandView extends SubView {
         Matcher matcher = CommandView.pattern.matcher(command);
         
         if(matcher.find()){
-            error = playController.move(Coordinate.fromString(matcher.group(ORIGIN_GROUP)),Coordinate.fromString(matcher.group(TARGET_GROUP)));   
+            error = playController.move(new Move(Coordinate.fromString(matcher.group(ORIGIN_GROUP)),Coordinate.fromString(matcher.group(TARGET_GROUP))));   
         } else {
             error = Error.NOT_UNDERSTAND;
         }

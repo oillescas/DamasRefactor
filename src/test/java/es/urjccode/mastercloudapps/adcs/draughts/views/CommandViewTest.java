@@ -14,6 +14,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import es.urjccode.mastercloudapps.adcs.draughts.controllers.PlayController;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Color;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Coordinate;
+import es.urjccode.mastercloudapps.adcs.draughts.models.Move;
 import es.urjccode.mastercloudapps.adcs.draughts.utils.Console;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -38,7 +39,7 @@ public class CommandViewTest {
         when(playController.getColor()).thenReturn(Color.BLACK);
         when(console.readString("Mueven las negras: ")).thenReturn("32.41\n");
         commandView.interact(playController);
-        verify(playController).move(new Coordinate(2,1), new Coordinate(3, 0));
+        verify(playController).move(new Move(new Coordinate(2,1), new Coordinate(3, 0)));
     }
 
 }
