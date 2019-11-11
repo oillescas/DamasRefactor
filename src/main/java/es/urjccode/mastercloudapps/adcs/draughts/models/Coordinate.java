@@ -17,12 +17,12 @@ public class Coordinate{
         this.column = column;
     }
 
-    public boolean isValid() {
+     boolean isValid() {
         return Coordinate.LOWER_LIMIT <= row && row <= Coordinate.UPPER_LIMIT && Coordinate.LOWER_LIMIT <= column
                 && column <= Coordinate.UPPER_LIMIT;
     }
 
-    public boolean isBlack() {
+     boolean isBlack() {
         assert this.isValid();
         return (this.row + this.column) % 2 != 0;
     }

@@ -12,21 +12,21 @@ public class Move extends MoveValidator{
         this.target = target;
     }
     
-    public Coordinate getOrigin() {
+    Coordinate getOrigin() {
 		return origin;
 	}
 
-	public Coordinate getTarget() {
+	Coordinate getTarget() {
 		return target;
 	}
     
-    public int diagonalDistance() {
+    int diagonalDistance() {
         assert target != null && target.isValid();
         assert this.origin.isValid() && this.isDiagonal();
         return Math.abs(this.origin.getRow() - target.getRow());
     }
     
-    public Coordinate betweenDiagonal() {
+    Coordinate betweenDiagonal() {
         assert target != null && target.isValid();
         assert this.origin.isValid() && this.diagonalDistance() == 2;
         int rowShift = 1;
@@ -40,14 +40,14 @@ public class Move extends MoveValidator{
         return new Coordinate(this.origin.getRow() + rowShift, this.origin.getColumn() + columnShift);
     }
     
-    public boolean isDiagonal() {
+    boolean isDiagonal() {
         assert target != null && target.isValid();
         assert origin.isValid();
         return origin.getRow() + origin.getColumn() == target.getRow() + target.getColumn()
                 || origin.getRow() - origin.getColumn() == target.getRow() - target.getColumn();
     }
     
-    public boolean isValid() {
+    boolean isValid() {
     	return origin.isValid() && target.isValid();
     }
     

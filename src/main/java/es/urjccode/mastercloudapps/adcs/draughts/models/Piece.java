@@ -13,7 +13,7 @@ public class Piece extends MoveValidator{
 		return this.color;
 	}
 
-	public boolean isAdvanced(Move move) {
+	boolean isAdvanced(Move move) {
 		int difference = move.getOrigin().getRow() - move.getTarget().getRow();
 		if (color == Color.WHITE){
 			return difference>0;
