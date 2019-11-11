@@ -22,33 +22,6 @@ public class Coordinate extends MoveValidator {
                 && column <= Coordinate.UPPER_LIMIT;
     }
 
-    public boolean isDiagonal(Coordinate coordinate) {
-        assert coordinate != null && coordinate.isValid();
-        assert this.isValid();
-        return this.row + this.column == coordinate.row + coordinate.column
-                || this.row - this.column == coordinate.row - coordinate.column;
-    }
-
-    public int diagonalDistance(Coordinate coordinate) {
-        assert coordinate != null && coordinate.isValid();
-        assert this.isValid() && this.isDiagonal(coordinate);
-        return Math.abs(this.row - coordinate.row);
-    }
-
-    public Coordinate betweenDiagonal(Coordinate coordinate) {
-        assert coordinate != null && coordinate.isValid();
-        assert this.isValid() && this.diagonalDistance(coordinate) == 2;
-        int rowShift = 1;
-        if (coordinate.row - this.row < 0) {
-            rowShift = -1;
-        }
-        int columnShift = 1;
-        if (coordinate.column - this.column < 0) {
-            columnShift = -1;
-        }
-        return new Coordinate(this.row + rowShift, this.column + columnShift);
-    }
-
     public boolean isBlack() {
         assert this.isValid();
         return (this.row + this.column) % 2 != 0;
@@ -98,10 +71,10 @@ public class Coordinate extends MoveValidator {
         if (!move.origin.isValid() || !move.target.isValid()) {
 			return Error.OUT_COORDINATE;
         }
-        if (!move.origin.isDiagonal(move.target)) {
+        if (!move.isDiagonal()) {
 			return Error.NOT_DIAGONAL;
         }
-        if (move.origin.diagonalDistance(move.target) >= 3) {
+        if (move.diagonalDistance() >= 3) {
 			return Error.BAD_DISTANCE;
 		}
         return this.validNext(move);

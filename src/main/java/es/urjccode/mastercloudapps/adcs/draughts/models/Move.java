@@ -14,7 +14,7 @@ public class Move {
     
     public int diagonalDistance() {
         assert target != null && target.isValid();
-        assert this.origin.isValid() && this.origin.isDiagonal(target);
+        assert this.origin.isValid() && this.isDiagonal();
         return Math.abs(this.origin.getRow() - target.getRow());
     }
     
@@ -30,6 +30,13 @@ public class Move {
             columnShift = -1;
         }
         return new Coordinate(this.origin.getRow() + rowShift, this.origin.getColumn() + columnShift);
+    }
+    
+    public boolean isDiagonal() {
+        assert target != null && target.isValid();
+        assert origin.isValid();
+        return origin.getRow() + origin.getColumn() == target.getRow() + target.getColumn()
+                || origin.getRow() - origin.getColumn() == target.getRow() - target.getColumn();
     }
     
     @Override
