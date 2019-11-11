@@ -2,15 +2,23 @@ package es.urjccode.mastercloudapps.adcs.draughts.models;
 
 public class Move extends MoveValidator{
 	 
-	public Coordinate origin;
+	private Coordinate origin;
 
-    public Coordinate target;
+	private Coordinate target;
 
     public Move(Coordinate origin, Coordinate target) {
     	assert origin != null && target != null;
         this.origin = origin;
         this.target = target;
     }
+    
+    public Coordinate getOrigin() {
+		return origin;
+	}
+
+	public Coordinate getTarget() {
+		return target;
+	}
     
     public int diagonalDistance() {
         assert target != null && target.isValid();

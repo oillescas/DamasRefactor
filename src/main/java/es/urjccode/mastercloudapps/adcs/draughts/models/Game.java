@@ -37,7 +37,7 @@ public class Game extends MoveValidator{
     }
 
     Error moveValid(Move move){
-        Color color = this.board.getColor(move.origin);
+        Color color = this.board.getColor(move.getOrigin());
 		if (color!=null && this.turn.getColor() != color) {
 			return Error.OPPOSITE_PIECE;
         }

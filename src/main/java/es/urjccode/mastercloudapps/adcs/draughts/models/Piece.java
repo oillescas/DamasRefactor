@@ -13,7 +13,7 @@ public class Piece {
 	}
 
 	public boolean isAdvanced(Move move) {
-		int difference = move.origin.getRow() - move.target.getRow();
+		int difference = move.getOrigin().getRow() - move.getTarget().getRow();
 		if (color == Color.WHITE){
 			return difference>0;
 		}

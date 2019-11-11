@@ -34,7 +34,7 @@ class Board extends MoveValidator{
     }
 
     void move(Move move) {
-        this.put(move.target, this.remove(move.origin));
+        this.put(move.getTarget(), this.remove(move.getOrigin()));
     }
 
     Piece getPiece(Coordinate coordinate) {
@@ -98,13 +98,13 @@ class Board extends MoveValidator{
 
     @Override
     Error moveValid(Move move) {
-        if (this.isEmpty(move.origin)) {
+        if (this.isEmpty(move.getOrigin())) {
 			return Error.EMPTY_ORIGIN;
         }
-        if (!this.isEmpty(move.target)) {
+        if (!this.isEmpty(move.getTarget())) {
 			return Error.NOT_EMPTY_TARGET;
 		}
-        Piece piece = this.getPiece(move.origin);
+        Piece piece = this.getPiece(move.getOrigin());
 		if (!piece.isAdvanced(move)) {
 			return Error.NOT_ADVANCED;
         }
