@@ -43,9 +43,10 @@ public class GameTest {
         for (int i = 0; i < coordinates.length; i++) {
             assertNull(error);
             System.out.println(game);
-            error = game.getErrorMove(coordinates[i][0], coordinates[i][1]);
+            Move move = new Move(coordinates[i][0], coordinates[i][1]);
+            error = game.getErrorMove(move);
             if(error==null){
-                game.move(coordinates[i][0], coordinates[i][1]);
+				game.move(move);
             }
         }
         return error;
@@ -113,12 +114,12 @@ public class GameTest {
     public void testGivenGameWhenCorrectMovementThenOk() {
         Coordinate origin = new Coordinate(5, 0);
         Coordinate target = new Coordinate(4, 1);
-        this.game.move(origin, target);
+        this.game.move(new Move(origin, target));
         assertNull(this.game.getColor(origin));
         assertEquals(Color.WHITE, this.game.getColor(target));
         origin = new Coordinate(2, 3);
         target = new Coordinate(3, 4);
-        this.game.move(origin, target);
+        this.game.move(new Move(origin, target));
         assertNull(this.game.getColor(origin));
         assertEquals(Color.BLACK, this.game.getColor(target));
     }

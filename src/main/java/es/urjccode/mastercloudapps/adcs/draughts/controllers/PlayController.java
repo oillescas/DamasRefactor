@@ -15,9 +15,9 @@ public class PlayController extends Controller {
 	}
 
 	public Error move(Move move){
-        Error error = this.game.getErrorMove(move.origin, move.target);
+        Error error = this.game.getErrorMove(move);
         if(error== null){
-            this.game.move(move.origin, move.target);
+            this.game.move(move);
         }
 
 		if (this.game.isBlocked()){

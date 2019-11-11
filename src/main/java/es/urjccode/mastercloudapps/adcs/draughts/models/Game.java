@@ -44,23 +44,23 @@ public class Game extends MoveValidator{
         return this.validNext(origin, target);
     }
 
-    public Error getErrorMove(Coordinate origin, Coordinate target){
+    public Error getErrorMove(Move move){
 
-        this.setNext(origin);
-        origin.setNext(board);
+        this.setNext(move.origin);
+        move.origin.setNext(board);
 
-        return this.moveValid(origin, target);
+        return this.moveValid(move.origin, move.target);
     }
 
-	public void move(Coordinate origin, Coordinate target) {
-		assert origin != null && target != null;
-        assert getErrorMove(origin, target) ==null;
+	public void move(Move move) {
+		assert move.origin != null && move.target != null;
+        assert getErrorMove(move) ==null;
 
-		if (origin.diagonalDistance(target) == 2) {
-			Coordinate between = origin.betweenDiagonal(target);
+		if (move.origin.diagonalDistance(move.target) == 2) {
+			Coordinate between = move.origin.betweenDiagonal(move.target);
 			this.board.remove(between);
 		}
-		this.board.move(origin, target);
+		this.board.move(move.origin, move.target);
 		this.turn.change();
 	}
 
