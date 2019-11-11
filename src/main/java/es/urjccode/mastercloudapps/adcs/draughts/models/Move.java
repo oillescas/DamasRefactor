@@ -7,8 +7,29 @@ public class Move {
     public Coordinate target;
 
     public Move(Coordinate origin, Coordinate target) {
+    	assert origin != null && target != null;
         this.origin = origin;
         this.target = target;
+    }
+    
+    public int diagonalDistance() {
+        assert target != null && target.isValid();
+        assert this.origin.isValid() && this.origin.isDiagonal(target);
+        return Math.abs(this.origin.getRow() - target.getRow());
+    }
+    
+    public Coordinate betweenDiagonal() {
+        assert target != null && target.isValid();
+        assert this.origin.isValid() && this.diagonalDistance() == 2;
+        int rowShift = 1;
+        if (target.getRow() - this.origin.getRow() < 0) {
+            rowShift = -1;
+        }
+        int columnShift = 1;
+        if (target.getColumn() - this.origin.getColumn() < 0) {
+            columnShift = -1;
+        }
+        return new Coordinate(this.origin.getRow() + rowShift, this.origin.getColumn() + columnShift);
     }
     
     @Override

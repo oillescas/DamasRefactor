@@ -53,11 +53,10 @@ public class Game extends MoveValidator{
     }
 
 	public void move(Move move) {
-		assert move.origin != null && move.target != null;
         assert getErrorMove(move) ==null;
 
-		if (move.origin.diagonalDistance(move.target) == 2) {
-			Coordinate between = move.origin.betweenDiagonal(move.target);
+		if (move.diagonalDistance() == 2) {
+			Coordinate between = move.betweenDiagonal();
 			this.board.remove(between);
 		}
 		this.board.move(move.origin, move.target);
